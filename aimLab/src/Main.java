@@ -1,5 +1,7 @@
 import aimLab.Game;
 import aimLab.Grid;
+import aimLab.Position;
+import aimLab.Target;
 import com.codeforall.simplegraphics.graphics.Rectangle;
 
 public class Main {
@@ -13,6 +15,7 @@ public class Main {
 
         Grid grid = new Grid(25,25);
         grid.init();
+        Target target = new Target(new Position(grid), grid);
 
 
 
