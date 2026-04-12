@@ -1,8 +1,6 @@
-import aimLab.Game;
-import aimLab.Grid;
-import aimLab.Position;
-import aimLab.Target;
+import aimLab.*;
 import com.codeforall.simplegraphics.graphics.Rectangle;
+import com.codeforall.simplegraphics.pictures.Picture;
 
 public class Main {
     public static void main() {
@@ -15,7 +13,14 @@ public class Main {
 
         Grid grid = new Grid(25,25);
         grid.init();
-        Target target = new Target(new Position(grid), grid);
+
+        Target target = new Target(new Position(grid), grid, new Picture(0.2, 0.2, "aimLab/resources/sphere.png"));
+
+        MouseInput mouse = new MouseInput();
+        mouse.init();
+        mouse.setTarget(target);
+
+
 
 
 
