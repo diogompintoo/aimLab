@@ -20,6 +20,9 @@ public class Main {
         mouse.init();
         mouse.setTarget(target);
 
+        KeyboardInput keyboard = new KeyboardInput();
+        keyboard.initKeys();
+
 
 
 
