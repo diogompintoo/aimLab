@@ -13,6 +13,7 @@ public class Main {
 
         Game game = new Game();
         game.start();
+
         KeyboardInput keyboard = new KeyboardInput();
         keyboard.initKeys();
 
@@ -24,11 +25,6 @@ public class Main {
         MouseInput mouse = new MouseInput();
         mouse.init();
         mouse.setTarget(target);*/
-
-
-
-
-
 
     }
 

@@ -40,11 +40,12 @@ public class Game {
     }
 
     public void spawnTarget() {
+        int newSize = 40;
         int x, y;
         boolean validPosition;
         int attempts = 0;
 
-        int size = 64;
+        int size = 40;
 
         do {
             x = (int)(Math.random() * 600);

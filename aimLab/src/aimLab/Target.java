@@ -12,11 +12,16 @@ public class Target {
 
     public Target(int x, int y) {
         picture = new Picture(x, y, "aimLab/resources/sphere.png");
+        picture.grow(-100,-100);
         picture.draw();
     }
 
     public Picture getPicture() {
         return picture;
+    }
+
+    public int getSize() {
+        return picture.getWidth();
     }
 
     public int getX() {
