@@ -46,7 +46,7 @@ public class Target {
 
     public boolean isOverlapping(int x, int y) {
 
-        int width = picture.getWidth(); // aprox tamaño de la esfera (ajústalo si quieres)
+        int width = picture.getWidth();
         int height = picture.getHeight();
 
         return !(x + width < picture.getX() ||

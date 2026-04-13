@@ -44,7 +44,7 @@ public class Game {
         boolean validPosition;
         int attempts = 0;
 
-        int size = 64; // tamaño aproximado de la esfera
+        int size = 64;
 
         do {
             x = (int)(Math.random() * 600);
