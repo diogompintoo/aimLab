@@ -1,46 +1,54 @@
 package aimLab;
 
-import com.codeforall.simplegraphics.mouse.Mouse;
-import com.codeforall.simplegraphics.mouse.MouseEvent;
-import com.codeforall.simplegraphics.mouse.MouseEventType;
-import com.codeforall.simplegraphics.mouse.MouseHandler;
+import com.codeforall.simplegraphics.graphics.Canvas;
 
-public class MouseInput implements MouseHandler {
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.List;
 
-    private Mouse mouse;
-    private Target target;
+public class MouseInput implements MouseListener {
 
+    private List<Target> targets;
+    private Score score;
+    private Game game;
 
-    public void init(){
-        mouse = new Mouse(this);
-        mouse.addEventListener(MouseEventType.MOUSE_CLICKED);
+    public MouseInput(Game game) {
+        this.game = game;
+    }
+
+    public void setTargets(List<Target> targets) {
+        this.targets = targets;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
+
+    public void init() {
+        Canvas.getCanvas().addMouseListener(this);
     }
 
     @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
+    public void mouseClicked(MouseEvent e) {
 
-        if (mouseEvent.getY() >= target.getTop() &&
-            mouseEvent.getY() <= target.getBottom() &&
-            mouseEvent.getX() >= target.getLeft() &&
-            mouseEvent.getX() <= target.getRight())
-        {
-            //add destroy target logic? call target and destroyable interface?
-            System.out.println("target clicked");
+        if (!game.isRunning()) return;
+
+        int x = e.getX();
+        int y = e.getY();
+
+        for (int i = 0; i < targets.size(); i++) {
+
+            Target t = targets.get(i);
+
+            if (t.isHit(x, y)) {
+                game.onTargetHit(t);
+                break;
+            }
         }
-
-        else {
-
-            System.out.println("clicking outside target");
-
-        }
-
     }
 
-    @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-
-    }
-
-    public void setTarget(Target target) {this.target = target;}
-
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
 }

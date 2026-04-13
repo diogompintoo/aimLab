@@ -11,17 +11,20 @@ public class Main {
         game.run();
         Rectangle rectangle;*/
 
-        Grid grid = new Grid(25,25);
+        Game game = new Game();
+        game.start();
+        KeyboardInput keyboard = new KeyboardInput();
+        keyboard.initKeys();
+
+        /*Grid grid = new Grid(25,25);
         grid.init();
 
         Target target = new Target(new Position(grid), grid, new Picture(0.2, 0.2, "aimLab/resources/sphere.png"));
 
         MouseInput mouse = new MouseInput();
         mouse.init();
-        mouse.setTarget(target);
+        mouse.setTarget(target);*/
 
-        KeyboardInput keyboard = new KeyboardInput();
-        keyboard.initKeys();
 
 
 

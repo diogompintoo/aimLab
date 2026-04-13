@@ -3,42 +3,55 @@ package aimLab;
 import com.codeforall.simplegraphics.graphics.Color;
 import com.codeforall.simplegraphics.pictures.Picture;
 
+import com.codeforall.simplegraphics.pictures.Picture;
+
 public class Target {
 
-    private Position position;
-    private Grid grid;
-    Picture picture;
-    int life;
-    int value;
+    private Picture picture;
+    private boolean alive = true;
 
-
-    public Target(Position position, Grid grid, Picture picture) {
-        this.position = position;
-        this.grid = grid;
-        this.picture = new Picture(0.2,0.2,"aimLab/resources/sphere.png");
-        getPosition().getRectangle().setColor(Color.RED);
+    public Target(int x, int y) {
+        picture = new Picture(x, y, "aimLab/resources/sphere.png");
         picture.draw();
-
     }
 
-    public int getTop(){
-        return picture.getY();
+    public Picture getPicture() {
+        return picture;
     }
 
-    public int getLeft(){
+    public int getX() {
         return picture.getX();
     }
 
-    public int getBottom(){
-        return picture.getMaxY();
+    public int getY() {
+        return picture.getY();
     }
 
-    public int getRight(){
-        return picture.getMaxX();
+    public boolean isHit(int mouseX, int mouseY) {
+
+        if (!alive) return false;
+
+        if (mouseX >= picture.getX() &&
+                mouseX <= picture.getMaxX() &&
+                mouseY >= picture.getY() &&
+                mouseY <= picture.getMaxY()) {
+
+            picture.delete();
+            alive = false;
+            return true;
+        }
+
+        return false;
     }
 
+    public boolean isOverlapping(int x, int y) {
 
-    public Position getPosition() {
-        return position;
+        int width = picture.getWidth(); // aprox tamaño de la esfera (ajústalo si quieres)
+        int height = picture.getHeight();
+
+        return !(x + width < picture.getX() ||
+                x > picture.getMaxX() ||
+                y + height < picture.getY() ||
+                y > picture.getMaxY());
     }
 }
