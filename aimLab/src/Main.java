@@ -13,10 +13,9 @@ public class Main {
         game.run();
         Rectangle rectangle;*/
 
-        Grid grid = new Grid(10,10);
+        Grid grid = new Grid(25,25);
         grid.init();
         Target target = new Target(new Position(grid), grid);
-
 
 
     }

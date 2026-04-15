@@ -8,16 +8,11 @@ import java.util.List;
 
 public class MouseInput implements MouseListener {
 
-    private List<Target> targets;
     private Score score;
     private Game game;
 
     public MouseInput(Game game) {
         this.game = game;
-    }
-
-    public void setTargets(List<Target> targets) {
-        this.targets = targets;
     }
 
     public void setScore(Score score) {
@@ -36,14 +31,11 @@ public class MouseInput implements MouseListener {
         int x = e.getX();
         int y = e.getY();
 
-        for (int i = 0; i < targets.size(); i++) {
+        Target t = game.getCurrentTarget();
 
-            Target t = targets.get(i);
+        if (t != null && t.isHit(x, y)) {
+            game.onTargetHit(t);
 
-            if (t.isHit(x, y)) {
-                game.onTargetHit(t);
-                break;
-            }
         }
     }
 

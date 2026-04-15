@@ -60,6 +60,10 @@ public class Game {
 
     public void onTargetHit(Target target){
         System.out.println("target hit");
-        target.Destroy();
+        gameMode.hitTarget();
+    }
+
+    public Target getCurrentTarget(){
+        return gameMode.currentTarget;
     }
 }

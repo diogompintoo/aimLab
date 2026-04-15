@@ -16,4 +16,13 @@ public class GameMode {
     public void spawnTarget() {
         currentTarget = factory.createTarget();
     }
+
+    public void hitTarget() {
+        if (currentTarget != null){
+            currentTarget.Destroy();
+        }
+        spawnTarget();
+    }
 }
+
+
