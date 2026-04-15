@@ -19,6 +19,9 @@ public class Game {
         grid.init();
 
         gameMode = new ClassicMode(grid);
+
+        MouseInput mouse = new MouseInput(this);
+        mouse.init();
     }
 
     public void run(){

@@ -1,12 +1,11 @@
 package aimLab;
 
-import com.codeforall.simplegraphics.graphics.Canvas;
+import com.codeforall.simplegraphics.mouse.Mouse;
+import com.codeforall.simplegraphics.mouse.MouseEvent;
+import com.codeforall.simplegraphics.mouse.MouseHandler;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.List;
 
-public class MouseInput implements MouseListener {
+public class MouseInput implements MouseHandler {
 
     private Score score;
     private Game game;
@@ -19,8 +18,9 @@ public class MouseInput implements MouseListener {
         this.score = score;
     }
 
+
     public void init() {
-        Canvas.getCanvas().addMouseListener(this);
+        Mouse mouse = new Mouse(this);
     }
 
     @Override
@@ -28,19 +28,26 @@ public class MouseInput implements MouseListener {
 
         if (!game.isRunning()) return;
 
-        int x = e.getX();
-        int y = e.getY();
+        int x = (int) e.getX();
+        int y = (int) e.getY();
 
         Target t = game.getCurrentTarget();
 
         if (t != null && t.isHit(x, y)) {
             game.onTargetHit(t);
+            System.out.println("debug click mouse");
 
         }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent mouseEvent) {
+
     }
 
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
+
 }
