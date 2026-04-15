@@ -53,4 +53,13 @@ public class Game {
     private void handleGameOver(){
         System.out.println("GAME OVER");
     }
+
+    public boolean isRunning() {
+        return currentState == GameState.PLAYING;
+    }
+
+    public void onTargetHit(Target target){
+        System.out.println("target hit");
+        target.Destroy();
+    }
 }

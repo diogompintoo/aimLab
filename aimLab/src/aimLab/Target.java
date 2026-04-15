@@ -20,6 +20,14 @@ public class Target implements Destroyable {
         return position;
     }
 
+    public boolean isHit(int mouseX, int mouseY){
+        int x = position.getCircle().getX();
+        int y = position.getCircle().getY();
+        int size = grid.getCellSize();
+
+        return mouseX >= x && mouseX <= x + size &&
+                mouseY >= y && mouseY <= y + size;
+    }
     /*@Override
     public void Destroy() {
         position.getRectangle().delete();
