@@ -13,7 +13,7 @@ public class Main {
         game.run();
         Rectangle rectangle;*/
 
-        Grid grid = new Grid(25,25);
+        Grid grid = new Grid(40,40);
         grid.init();
         Target target = new Target(new Position(grid), grid);
 

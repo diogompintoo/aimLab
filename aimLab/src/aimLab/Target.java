@@ -13,15 +13,19 @@ public class Target implements Destroyable {
     public Target(Position position, Grid grid) {
         this.position = position;
         this.grid = grid;
-        getPosition().getRectangle().setColor(Color.RED);
+        getPosition().getCircle().setColor(Color.RED);
     }
 
     public Position getPosition() {
         return position;
     }
 
-    @Override
+    /*@Override
     public void Destroy() {
         position.getRectangle().delete();
+    }*/
+
+    public void Destroy(){
+        position.getCircle().delete();
     }
 }
