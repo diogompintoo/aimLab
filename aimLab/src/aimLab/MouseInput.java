@@ -3,6 +3,7 @@ package aimLab;
 import com.codeforall.simplegraphics.mouse.Mouse;
 import com.codeforall.simplegraphics.mouse.MouseEvent;
 import com.codeforall.simplegraphics.mouse.MouseHandler;
+import com.codeforall.simplegraphics.mouse.MouseEventType;
 
 
 public class MouseInput implements MouseHandler {
@@ -21,6 +22,7 @@ public class MouseInput implements MouseHandler {
 
     public void init() {
         Mouse mouse = new Mouse(this);
+        mouse.addEventListener(MouseEventType.MOUSE_CLICKED);
     }
 
     @Override

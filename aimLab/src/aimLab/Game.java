@@ -15,7 +15,7 @@ public class Game {
     }
 
     public void init() {
-        Grid grid = new Grid(30, 30);
+        Grid grid = new Grid(20, 20);
         grid.init();
 
         gameMode = new ClassicMode(grid);
@@ -51,7 +51,11 @@ public class Game {
         gameMode.start();
     }
     private void handlePlaying(){
-        System.out.println("PLAYING");
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
     private void handleGameOver(){
         System.out.println("GAME OVER");

@@ -6,7 +6,6 @@ import com.codeforall.simplegraphics.graphics.Rectangle;
 
 public class Main {
     public static void main(String[] args) {
-
         Game game = new Game();
         game.run();
 
@@ -15,10 +14,6 @@ public class Main {
         game = new Game();
         game.run();
         Rectangle rectangle;*/
-
-        Grid grid = new Grid(25,25);
-        grid.init();
-        Target target = new Target(new Position(grid), grid);
 
 
     }
