@@ -2,7 +2,7 @@ package aimLab;
 
 import com.codeforall.simplegraphics.graphics.Color;
 
-public class Target {
+public class Target implements Destroyable {
 
     private Position position;
     private Grid grid;
@@ -18,5 +18,10 @@ public class Target {
 
     public Position getPosition() {
         return position;
+    }
+
+    @Override
+    public void Destroy() {
+        position.getRectangle().delete();
     }
 }

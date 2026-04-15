@@ -7,22 +7,50 @@ public class Game {
         PLAYING,
         GAME_OVER;
     }
-    GameState currentState = GameState.MENU;
+    private GameState currentState;
+    private GameMode gameMode;
+
+    public Game() {
+        currentState = GameState.MENU;
+    }
+
+    public void init() {
+        Grid grid = new Grid(30, 30);
+        grid.init();
+
+        gameMode = new ClassicMode(grid);
+    }
 
     public void run(){
+        init();
         while (true){
-            if (currentState == GameState.MENU)
-            {
-                System.out.println("MENU");
-            }
-            if (currentState == GameState.PLAYING)
-            {
-                System.out.println("PLAYING");
-            }
-            if (currentState == GameState.GAME_OVER)
-            {
-                System.out.println("GAME OVER");
+            switch (currentState){
+
+                case MENU:
+                    handleMenu();
+                    break;
+
+                case PLAYING:
+                    handlePlaying();
+                    break;
+
+                case GAME_OVER:
+                    handleGameOver();
+                    break;
             }
         }
+    }
+
+    private void handleMenu(){
+        System.out.println("MENU");
+
+        currentState = GameState.PLAYING;
+        gameMode.start();
+    }
+    private void handlePlaying(){
+        System.out.println("PLAYING");
+    }
+    private void handleGameOver(){
+        System.out.println("GAME OVER");
     }
 }
