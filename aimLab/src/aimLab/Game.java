@@ -28,6 +28,9 @@ public class Game {
         mouseInput = new MouseInput(this);
         mouseInput.setTargets(gameMode.getTargets());
         mouseInput.init();
+
+        KeyboardInput keyboard = new KeyboardInput();
+        keyboard.initKeys();
     }
 
     public void run(){
