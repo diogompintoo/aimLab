@@ -26,8 +26,7 @@ public class Position {
 
 
         circle = new Ellipse(x, y, grid.getCellSize(), grid.getCellSize());
-        circle.setColor(Color.RED);
-        circle.fill();
+
     }
 
     public int getX() {

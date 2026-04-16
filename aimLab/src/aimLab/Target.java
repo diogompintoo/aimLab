@@ -1,11 +1,13 @@
 package aimLab;
 
 import com.codeforall.simplegraphics.graphics.Color;
+import com.codeforall.simplegraphics.pictures.Picture;
 
 public class Target implements Destroyable {
 
     private Position position;
     private Grid grid;
+    private Picture picture;
     int life;
     int value;
 
@@ -13,7 +15,15 @@ public class Target implements Destroyable {
     public Target(Position position, Grid grid) {
         this.position = position;
         this.grid = grid;
-        getPosition().getCircle().setColor(Color.RED);
+
+        int x = position.getX();
+        int y = position.getY();
+
+        picture = new Picture(x, y, "aimLab/aimLab/resources/sphere.png");
+
+        picture.draw();
+        int size = grid.getCellSize();
+        picture.grow(-(picture.getWidth() - size), -(picture.getHeight() - size));
     }
 
     public Position getPosition() {
@@ -21,17 +31,15 @@ public class Target implements Destroyable {
     }
 
     public boolean isHit(int mouseX, int mouseY){
-        int x = position.getX();
-        int y = position.getY();
-        int size = grid.getCellSize();
+        return  mouseX >= picture.getX() &&
+                mouseX <= picture.getMaxX() &&
+                mouseY >= picture.getY() &&
+                mouseY <= picture.getMaxY();
 
 
-
-        return mouseX >= x && mouseX <= x + size &&
-                mouseY >= y && mouseY <= y + size;
     }
 
     public void Destroy(){
-        position.getCircle().delete();
+        picture.delete();
     }
 }
