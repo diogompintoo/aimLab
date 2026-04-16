@@ -9,6 +9,8 @@ public class Position {
     private int row;
     private Grid grid;
     private Ellipse circle;
+    private int x;
+    private int y;
 
 
     public Position(Grid grid) {
@@ -17,13 +19,23 @@ public class Position {
         col = (int)(Math.random() * (grid.getCols()-2))+1;
         row = (int)(Math.random() * (grid.getRows()-2))+1;
 
-        int x = grid.colToX(col);
-        int y = grid.rowToY(row);
+        x = grid.colToX(col);
+        y = grid.rowToY(row);
+
+
 
 
         circle = new Ellipse(x, y, grid.getCellSize(), grid.getCellSize());
         circle.setColor(Color.RED);
         circle.fill();
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public int getCol() {return col;}

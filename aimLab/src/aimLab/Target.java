@@ -21,9 +21,13 @@ public class Target implements Destroyable {
     }
 
     public boolean isHit(int mouseX, int mouseY){
-        int x = position.getCircle().getX();
-        int y = position.getCircle().getY();
+        int x = position.getX();
+        int y = position.getY();
         int size = grid.getCellSize();
+
+
+        System.out.println("target em: " + x + "," + y + " size: " + size);
+        System.out.println("mouse em: " + mouseX + "," + mouseY);
 
         return mouseX >= x && mouseX <= x + size &&
                 mouseY >= y && mouseY <= y + size;

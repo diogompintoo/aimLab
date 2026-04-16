@@ -24,6 +24,7 @@ public class MouseInput implements MouseListener {
         int x = e.getX();
         int y = e.getY();
         System.out.println("test click mouse");
+        System.out.println("Click raw: " + x + "," + y);
 
 
         List<Target> targets = game.targets();
