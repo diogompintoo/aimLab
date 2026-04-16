@@ -1,28 +1,26 @@
 package aimLab;
 
+import java.util.List;
+
 public class GameMode {
     protected Grid grid;
     protected TargetsFactory factory;
-    protected Target currentTarget;
+    protected List<Target> targets;
 
-    public GameMode (Grid grid) {
+    public GameMode(Grid grid) {
         this.grid = grid;
         this.factory = new TargetsFactory(grid);
     }
 
-    public void start(){
-        spawnTarget();
-    }
-    public void spawnTarget() {
-        currentTarget = factory.createTarget();
+    public void start() {
+        spawnTargets(10);
     }
 
-    public void hitTarget() {
-        if (currentTarget != null){
-            currentTarget.Destroy();
-        }
-        spawnTarget();
+    public void spawnTargets(int amount) {
+        targets = factory.createTargets(amount);
+    }
+
+    public List<Target> getTargets() {
+        return targets;
     }
 }
-
-

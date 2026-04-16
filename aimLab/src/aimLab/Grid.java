@@ -5,7 +5,7 @@ import com.codeforall.simplegraphics.graphics.Rectangle;
 public class Grid {
 
     public static final int PADDING = 10;
-    private int cellSize = 15;
+    private int cellSize = 30;
     private int cols;
     private int rows;
 

@@ -9,34 +9,37 @@ public class Game {
     }
     private GameState currentState;
     private GameMode gameMode;
+    private MouseInput mouseInput;
+    private Score score;
 
     public Game() {
         currentState = GameState.MENU;
     }
 
     public void init() {
-        Grid grid = new Grid(20, 20);
+        Grid grid = new Grid(30, 30);
         grid.init();
 
-        gameMode = new ClassicMode(grid);
+        score = new Score();
 
-        MouseInput mouse = new MouseInput(this);
-        mouse.init();
+        gameMode = new ClassicMode(grid);
+        gameMode.start();
+
+        mouseInput = new MouseInput(this);
+        mouseInput.setTargets(gameMode.getTargets());
+        mouseInput.init();
     }
 
     public void run(){
         init();
         while (true){
             switch (currentState){
-
                 case MENU:
                     handleMenu();
                     break;
-
                 case PLAYING:
                     handlePlaying();
                     break;
-
                 case GAME_OVER:
                     handleGameOver();
                     break;
@@ -46,10 +49,9 @@ public class Game {
 
     private void handleMenu(){
         System.out.println("MENU");
-
         currentState = GameState.PLAYING;
-        gameMode.start();
     }
+
     private void handlePlaying(){
         try {
             Thread.sleep(20);
@@ -57,6 +59,7 @@ public class Game {
             Thread.currentThread().interrupt();
         }
     }
+
     private void handleGameOver(){
         System.out.println("GAME OVER");
     }
@@ -66,11 +69,9 @@ public class Game {
     }
 
     public void onTargetHit(Target target){
-        System.out.println("target hit");
-        gameMode.hitTarget();
-    }
-
-    public Target getCurrentTarget(){
-        return gameMode.currentTarget;
+        gameMode.getTargets().remove(target);
+        target.Destroy();
+        score.add();
+        System.out.println("Score: " + score.getScore());
     }
 }

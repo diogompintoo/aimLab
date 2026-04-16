@@ -5,20 +5,20 @@ import com.codeforall.simplegraphics.mouse.MouseEvent;
 import com.codeforall.simplegraphics.mouse.MouseHandler;
 import com.codeforall.simplegraphics.mouse.MouseEventType;
 
+import java.util.List;
 
 public class MouseInput implements MouseHandler {
 
-    private Score score;
     private Game game;
+    private List<Target> targets;
 
     public MouseInput(Game game) {
         this.game = game;
     }
 
-    public void setScore(Score score) {
-        this.score = score;
+    public void setTargets(List<Target> targets) {
+        this.targets = targets;
     }
-
 
     public void init() {
         Mouse mouse = new Mouse(this);
@@ -33,23 +33,15 @@ public class MouseInput implements MouseHandler {
         int x = (int) e.getX();
         int y = (int) e.getY();
 
-        Target t = game.getCurrentTarget();
-
-        if (t != null && t.isHit(x, y)) {
-            game.onTargetHit(t);
-            System.out.println("debug click mouse");
-
+        for (int i = 0; i < targets.size(); i++) {
+            Target t = targets.get(i);
+            if (t.isHit(x, y)) {
+                game.onTargetHit(t);
+                break;
+            }
         }
     }
 
     @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-
-    }
-
-    public void mousePressed(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e) {}
-    public void mouseExited(MouseEvent e) {}
-
+    public void mouseMoved(MouseEvent mouseEvent) {}
 }

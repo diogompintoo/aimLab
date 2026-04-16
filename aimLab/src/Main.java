@@ -5,15 +5,12 @@ import aimLab.Target;
 import com.codeforall.simplegraphics.graphics.Rectangle;
 
 public class Main {
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.run();
+    public static void main() {
 
         System.out.println("Let's shoot something");
-        /*Game game;
-        game = new Game();
+
+        Game game = new Game();
         game.run();
-        Rectangle rectangle;*/
 
 
     }
