@@ -21,21 +21,26 @@ public class MouseInput implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         if (!game.isRunning()) return;
+
         int x = e.getX();
         int y = e.getY();
-        System.out.println("test click mouse");
-        System.out.println("Click raw: " + x + "," + y);
 
 
         List<Target> targets = game.targets();
-        for (int i = 0; i < targets.size(); i++) {
-            Target t = targets.get(i);
+
+        Target hitTarget = null;
+
+        for (Target t : targets) {
             if (t.isHit(x, y)) {
-                game.onTargetHit(t);
+                hitTarget = t;
                 break;
             }
         }
+        if (hitTarget != null) {
+            game.onTargetHit(hitTarget);
+        }
     }
+
 
     @Override
     public void mousePressed(MouseEvent e) {}

@@ -26,8 +26,6 @@ public class Target implements Destroyable {
         int size = grid.getCellSize();
 
 
-        System.out.println("target em: " + x + "," + y + " size: " + size);
-        System.out.println("mouse em: " + mouseX + "," + mouseY);
 
         return mouseX >= x && mouseX <= x + size &&
                 mouseY >= y && mouseY <= y + size;

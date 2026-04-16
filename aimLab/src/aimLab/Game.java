@@ -18,7 +18,7 @@ public class Game {
     }
 
     public void init() {
-        Grid grid = new Grid(50, 50);
+        Grid grid = new Grid(15, 15);
         grid.init();
         score = new Score();
         gameMode = new ClassicMode(grid);
@@ -52,11 +52,11 @@ public class Game {
     }
 
     private void handlePlaying(){
-        try {
+     /*   try {
             Thread.sleep(20);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-        }
+        }*/
     }
 
     private void handleGameOver(){
@@ -72,8 +72,9 @@ public class Game {
     }
 
     public void onTargetHit(Target target){
-        gameMode.getTargets().remove(target);
         target.Destroy();
+        gameMode.getTargets().remove(target);
+        gameMode.spawnNewTargets();
         score.add();
         System.out.println("Score: " + score.getScore());
     }

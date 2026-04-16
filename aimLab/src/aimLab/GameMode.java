@@ -12,14 +12,14 @@ public class GameMode {
     }
 
     public void start() {
-        spawnTargets(5);
+        spawnTargets(1);
     }
 
     public void spawnTargets(int amount) {
         targets = factory.createTargets(amount);
     }
 
-    public void spawNewTargets() {
+    public void spawnNewTargets() {
         targets.add(factory.createTarget());
     }
 
