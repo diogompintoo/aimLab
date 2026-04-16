@@ -1,5 +1,4 @@
 package aimLab;
-
 import java.util.List;
 
 public class GameMode {
@@ -18,6 +17,10 @@ public class GameMode {
 
     public void spawnTargets(int amount) {
         targets = factory.createTargets(amount);
+    }
+
+    public void spawNewTargets() {
+        targets.add(factory.createTarget());
     }
 
     public List<Target> getTargets() {

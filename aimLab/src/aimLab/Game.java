@@ -1,4 +1,5 @@
 package aimLab;
+import java.util.List;
 
 public class Game {
 
@@ -19,16 +20,11 @@ public class Game {
     public void init() {
         Grid grid = new Grid(30, 30);
         grid.init();
-
         score = new Score();
-
         gameMode = new ClassicMode(grid);
         gameMode.start();
-
         mouseInput = new MouseInput(this);
-        mouseInput.setTargets(gameMode.getTargets());
         mouseInput.init();
-
         KeyboardInput keyboard = new KeyboardInput();
         keyboard.initKeys();
     }
@@ -69,6 +65,10 @@ public class Game {
 
     public boolean isRunning() {
         return currentState == GameState.PLAYING;
+    }
+
+    public List<Target> targets() {
+        return gameMode.getTargets();
     }
 
     public void onTargetHit(Target target){
