@@ -8,22 +8,18 @@ public class Position {
     private int col;
     private int row;
     private Grid grid;
-    /*private Rectangle rectangle;*/
     private Ellipse circle;
 
 
     public Position(Grid grid) {
         this.grid = grid;
 
-        col = (int)(Math.random() * grid.getCols());
-        row = (int)(Math.random() * grid.getRows());
+        col = (int)(Math.random() * (grid.getCols()-2))+1;
+        row = (int)(Math.random() * (grid.getRows()-2))+1;
 
         int x = grid.colToX(col);
         int y = grid.rowToY(row);
 
-        /*rectangle = new Rectangle(x, y, grid.getCellSize(), grid.getCellSize());
-        rectangle.fill();
-        rectangle.setColor(Color.RED);*/
 
         circle = new Ellipse(x, y, grid.getCellSize(), grid.getCellSize());
         circle.setColor(Color.RED);
@@ -34,8 +30,6 @@ public class Position {
 
     public int getRow() {return row;}
 
-    /*public Rectangle getRectangle() {return rectangle;}
-*/
     public Ellipse getCircle() {
         return circle;
     }

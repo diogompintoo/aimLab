@@ -28,10 +28,6 @@ public class Target implements Destroyable {
         return mouseX >= x && mouseX <= x + size &&
                 mouseY >= y && mouseY <= y + size;
     }
-    /*@Override
-    public void Destroy() {
-        position.getRectangle().delete();
-    }*/
 
     public void Destroy(){
         position.getCircle().delete();
