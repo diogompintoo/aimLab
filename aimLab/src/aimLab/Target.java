@@ -46,7 +46,7 @@ public class Target implements Destroyable {
         if (picture.getMaxY() > Grid.PADDING + grid.getRows() * grid.getCellSize() - padding) {
             picture.translate(0,
                     Grid.PADDING + grid.getRows() * grid.getCellSize() - padding - picture.getMaxY());
-        }\
+        }
     }
 
     public Position getPosition() {

@@ -12,6 +12,7 @@ public class Game {
     private GameMode gameMode;
     private MouseInput mouseInput;
     private Score score;
+    private Grid grid;
 
     public Game() {
         currentState = GameState.MENU;
