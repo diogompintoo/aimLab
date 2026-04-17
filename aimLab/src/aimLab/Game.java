@@ -18,7 +18,7 @@ public class Game {
     }
 
     public void init() {
-        Grid grid = new Grid(15, 15);
+        Grid grid = new Grid(20, 15);
         grid.init();
         score = new Score();
         gameMode = new ClassicMode(grid);

@@ -15,15 +15,17 @@ public class Target implements Destroyable {
     public Target(Position position, Grid grid) {
         this.position = position;
         this.grid = grid;
+        int size = 150;// change this to change pgn size
 
-        int x = position.getX();
-        int y = position.getY();
+        picture = new Picture(position.getX(), position.getY(), "aimLab/aimLab/resources/sphere.png");
 
-        picture = new Picture(x, y, "aimLab/aimLab/resources/sphere.png");
+        int deltaX = size - picture.getWidth();
+        int deltaY = size - picture.getHeight();
+        picture.grow(deltaX, deltaY);
+
+        picture.translate(-picture.getWidth() / 2, -picture.getHeight() / 2);
 
         picture.draw();
-        int size = grid.getCellSize();
-        picture.grow(-(picture.getWidth() - size), -(picture.getHeight() - size));
     }
 
     public Position getPosition() {
@@ -40,6 +42,9 @@ public class Target implements Destroyable {
     }
 
     public void Destroy(){
+        if (picture != null){
         picture.delete();
+        picture = null;
     }
+}
 }

@@ -12,7 +12,7 @@ public class GameMode {
     }
 
     public void start() {
-        spawnTargets(1);
+        spawnTargets(5);
     }
 
     public void spawnTargets(int amount) {
