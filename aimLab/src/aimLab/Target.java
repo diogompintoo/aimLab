@@ -15,7 +15,7 @@ public class Target implements Destroyable {
     public Target(Position position, Grid grid) {
         this.position = position;
         this.grid = grid;
-        int size = 150;// change this to change pgn size
+        int size = 160;// change this to change pgn size
 
         picture = new Picture(position.getX(), position.getY(), "aimLab/aimLab/resources/sphere.png");
 
@@ -25,7 +25,28 @@ public class Target implements Destroyable {
 
         picture.translate(-picture.getWidth() / 2, -picture.getHeight() / 2);
 
+        targetInside();
+
         picture.draw();
+    }
+
+    private void targetInside(){
+        int padding = 5;
+        if (picture.getX() < Grid.PADDING + padding) {
+            picture.translate(Grid.PADDING + padding - picture.getX(), 0);
+        }
+        if (picture.getMaxX() > Grid.PADDING + grid.getCols() * grid.getCellSize() - padding) {
+            picture.translate(
+                    Grid.PADDING + grid.getCols() * grid.getCellSize() - padding - picture.getMaxX(),
+                    0);
+        }
+        if (picture.getY() < Grid.PADDING + padding) {
+            picture.translate(0, Grid.PADDING + padding - picture.getY());
+        }
+        if (picture.getMaxY() > Grid.PADDING + grid.getRows() * grid.getCellSize() - padding) {
+            picture.translate(0,
+                    Grid.PADDING + grid.getRows() * grid.getCellSize() - padding - picture.getMaxY());
+        }\
     }
 
     public Position getPosition() {

@@ -11,13 +11,13 @@ public class Position {
     public Position(Grid grid) {
         this.grid = grid;
 
-        col = (int)(Math.random() * (grid.getCols()-2))+1;
-        row = (int)(Math.random() * (grid.getRows()-2))+1;
+        int margin = 2;
 
-        x = grid.colToX(col);
-        y = grid.rowToY(row);
+        col =margin + (int)(Math.random() * (grid.getCols() - margin *2));
+        row =margin + (int)(Math.random() * (grid.getRows() - margin *2));
 
-
+        x = grid.colToX(col) + grid.getCellSize() /2;
+        y = grid.rowToY(row) + grid.getCellSize() /2;
 
     }
 
