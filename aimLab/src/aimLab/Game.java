@@ -12,6 +12,7 @@ public class Game {
     private GameMode gameMode;
     private MouseInput mouseInput;
     private Score score;
+    private Timer timer;
     private Grid grid;
 
     public Game() {
@@ -22,6 +23,8 @@ public class Game {
         Grid grid = new Grid(20, 15);
         grid.init();
         score = new Score();
+        timer = new Timer(this,60);
+        timer.start();
         gameMode = new ClassicMode(grid);
         gameMode.start();
         mouseInput = new MouseInput(this);
@@ -78,5 +81,11 @@ public class Game {
         gameMode.spawnNewTargets();
         score.add();
         System.out.println("Score: " + score.getScore());
+    }
+    public void gameOver() {
+        currentState = GameState.GAME_OVER;
+        timer.stop();
+        System.out.println("GAME OVER");
+        System.out.println("FINAL SCORE: " + score.getScore());
     }
 }
