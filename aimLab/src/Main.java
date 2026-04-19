@@ -1,4 +1,5 @@
 import aimLab.Game;
+import com.codeforall.simplegraphics.graphics.Canvas;
 
 void main () {
     {

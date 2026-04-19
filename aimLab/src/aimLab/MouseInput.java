@@ -34,10 +34,7 @@ public class MouseInput implements MouseHandler {
         double x = mouseEvent.getX();
         double y = mouseEvent.getY();
 
-
-        List<Target> targets = null;
-        if (mouseEvent.getY() >= picture.getX()) {
-        }targets = game.targets();
+        List<Target> targets = game.targets();
 
         Target hitTarget = null;
 
