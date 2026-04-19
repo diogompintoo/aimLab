@@ -1,6 +1,5 @@
 package aimLab;
 
-import com.codeforall.simplegraphics.graphics.Color;
 import com.codeforall.simplegraphics.pictures.Picture;
 
 public class Target implements Destroyable {
@@ -12,26 +11,30 @@ public class Target implements Destroyable {
     int value;
 
 
+
+
     public Target(Position position, Grid grid) {
         this.position = position;
         this.grid = grid;
         int size = 160;// change this to change pgn size
 
-        picture = new Picture(position.getX(), position.getY(), "aimLab/aimLab/resources/sphere.png");
+        picture = new Picture(position.getX(), position.getY(), "aimLab/resources/sphere.png");
+
 
         int deltaX = size - picture.getWidth();
         int deltaY = size - picture.getHeight();
         picture.grow(deltaX, deltaY);
 
-        picture.translate(-picture.getWidth() / 2, -picture.getHeight() / 2);
+        picture.translate((double) -picture.getWidth() / 2, (double) -picture.getHeight() / 2);
 
         targetInside();
 
         picture.draw();
+
     }
 
     private void targetInside(){
-        int padding = 5;
+        int padding = 2;
         if (picture.getX() < Grid.PADDING + padding) {
             picture.translate(Grid.PADDING + padding - picture.getX(), 0);
         }
@@ -49,11 +52,17 @@ public class Target implements Destroyable {
         }
     }
 
+
+    public Picture getPicture(){
+        return picture;
+
+    }
+
     public Position getPosition() {
         return position;
     }
 
-    public boolean isHit(int mouseX, int mouseY){
+    public boolean isHit(double mouseX, double mouseY){
         return  mouseX >= picture.getX() &&
                 mouseX <= picture.getMaxX() &&
                 mouseY >= picture.getY() &&

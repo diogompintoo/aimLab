@@ -1,32 +1,43 @@
 package aimLab;
 
 import com.codeforall.simplegraphics.graphics.Canvas;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import com.codeforall.simplegraphics.mouse.Mouse;
+import com.codeforall.simplegraphics.mouse.MouseEvent;
+import com.codeforall.simplegraphics.mouse.MouseEventType;
+import com.codeforall.simplegraphics.mouse.MouseHandler;
+import com.codeforall.simplegraphics.pictures.Picture;
+
 import java.util.List;
 
-public class MouseInput implements MouseListener {
+public class MouseInput implements MouseHandler {
 
+    private Mouse mouse;
     private Game game;
-
+    private Picture picture;
     public MouseInput(Game game) {
         this.game = game;
     }
 
     public void init() {
-        Canvas.getCanvas().addMouseListener(this);
+        mouse = new Mouse(this);
+        mouse.addEventListener(MouseEventType.MOUSE_CLICKED);
+        picture = new Picture();
+        //Canvas.getCanvas().addMouseListener(this);
     }
 
+
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent mouseEvent) {
 
         if (!game.isRunning()) return;
 
-        int x = e.getX();
-        int y = e.getY();
+        double x = mouseEvent.getX();
+        double y = mouseEvent.getY();
 
 
-        List<Target> targets = game.targets();
+        List<Target> targets = null;
+        if (mouseEvent.getY() >= picture.getX()) {
+        }targets = game.targets();
 
         Target hitTarget = null;
 
@@ -41,8 +52,13 @@ public class MouseInput implements MouseListener {
         }
     }
 
-
     @Override
+    public void mouseMoved(MouseEvent mouseEvent) {
+
+    }
+
+
+    /*@Override
     public void mousePressed(MouseEvent e) {}
 
     @Override
@@ -53,4 +69,7 @@ public class MouseInput implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {}
+}
+
+     */
 }
