@@ -1,6 +1,11 @@
 package aimLab;
 
 import com.codeforall.simplegraphics.graphics.Rectangle;
+import com.codeforall.simplegraphics.pictures.Picture;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 public class Grid {
 
@@ -8,6 +13,7 @@ public class Grid {
     private int cellSize = 40;
     private int cols;
     private int rows;
+    private Picture gridBackground;
 
     public Grid(int cols, int rows){
         this.cols = cols;
@@ -15,8 +21,11 @@ public class Grid {
     }
 
     public void init(){
-        Rectangle field = new Rectangle(PADDING, PADDING, cols * cellSize, rows * cellSize);
-        field.draw();
+        //Rectangle field = new Rectangle(PADDING, PADDING, cols * cellSize, rows * cellSize);
+        gridBackground = new Picture(0,0,"aimLab/resources/background.jpg");
+        gridBackground.draw();
+        //field.draw();
+
     }
 
     public int getCellSize() {return cellSize;}
