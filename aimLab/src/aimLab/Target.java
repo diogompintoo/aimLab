@@ -63,7 +63,7 @@ public class Target implements Destroyable {
     }
 
     public boolean isHit(double mouseX, double mouseY){
-        int offsetY = 32;
+        int offsetY = 2;
         int padding = 10;
 
         return  mouseX >= picture.getX() + padding &&
