@@ -14,21 +14,25 @@ public class Game {
     private Score score;
     private Timer timer;
     private Grid grid;
+    private Menu menu;
+    private GameOverScreen gameOverScreen;
 
     public Game() {
-        currentState = GameState.MENU;
+        currentState = GameState.PLAYING;
     }
 
     public void init() {
-        Grid grid = new Grid(20, 15);
+        grid = new Grid(20, 15);
         grid.init();
         score = new Score();
-        timer = new Timer(this,60);
+        timer = new Timer(this,10);
         timer.start();
         gameMode = new ClassicMode(grid);
         gameMode.start();
+        gameOverScreen = new GameOverScreen();
         mouseInput = new MouseInput(this);
         mouseInput.init();
+
         KeyboardInput keyboard = new KeyboardInput();
         keyboard.initKeys();
     }
@@ -51,16 +55,8 @@ public class Game {
     }
 
     private void handleMenu(){
-        System.out.println("MENU");
-        currentState = GameState.PLAYING;
     }
-
     private void handlePlaying(){
-     /*   try {
-            Thread.sleep(20);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }*/
     }
 
     private void handleGameOver(){
@@ -85,6 +81,12 @@ public class Game {
     public void gameOver() {
         currentState = GameState.GAME_OVER;
         timer.stop();
+        for (Target t : targets()){
+            t.Destroy();
+        }
+        gameMode.getTargets().clear();
+
+        gameOverScreen.show(score.getScore());
         System.out.println("GAME OVER");
         System.out.println("FINAL SCORE: " + score.getScore());
     }

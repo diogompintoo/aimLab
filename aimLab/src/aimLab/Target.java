@@ -18,7 +18,7 @@ public class Target implements Destroyable {
         this.grid = grid;
         int size = 160;// change this to change pgn size
 
-        picture = new Picture(position.getX(), position.getY(), "aimLab/resources/sphere.png");
+        picture = new Picture(position.getX(), position.getY(), "aimLab/aimLab/resources/sphere.png");
 
 
         int deltaX = size - picture.getWidth();
@@ -34,7 +34,7 @@ public class Target implements Destroyable {
     }
 
     private void targetInside(){
-        int padding = 2;
+        int padding = 1;
         if (picture.getX() < Grid.PADDING + padding) {
             picture.translate(Grid.PADDING + padding - picture.getX(), 0);
         }
