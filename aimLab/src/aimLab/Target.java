@@ -18,7 +18,7 @@ public class Target implements Destroyable {
         this.grid = grid;
         int size = 160;
 
-        picture = new Picture(position.getX(), position.getY(), "aimLab/resources/sphere.png");
+        picture = new Picture(position.getX(), position.getY(), "resources/sphere.png");
 
 
         int deltaX = size - picture.getWidth();

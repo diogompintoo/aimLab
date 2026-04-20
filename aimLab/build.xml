@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="aimLab" default="run" basedir=".">
+
+    <property name="src.dir"       value="src"/>
+    <property name="build.dir"     value="out/production/aimLab"/>
+    <property name="resources.dir" value="resources"/>
+    <property name="main.class"    value="aimLab.Main"/>
+    <property name="lib.dir"       value="lib"/>
+
+    <path id="classpath">
+        <pathelement location="${build.dir}"/>
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${build.dir}"/>
+
+        <javac srcdir="${src.dir}"
+               destdir="${build.dir}"
+               includeantruntime="false"
+               encoding="UTF-8"
+               classpathref="classpath"/>
+
+
+        <copy todir="${build.dir}">
+            <fileset dir="${resources.dir}"/>
+        </copy>
+
+        <echo message="✅ Compilação OK!"/>
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="${main.class}" fork="true">
+            <classpath refid="classpath"/>
+        </java>
+    </target>
+
+</project>
