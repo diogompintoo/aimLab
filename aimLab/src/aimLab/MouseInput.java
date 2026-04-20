@@ -51,6 +51,13 @@ public class MouseInput implements MouseHandler {
         if (hitTarget != null) {
             game.onTargetHit(hitTarget);
         }
+
+        if (game.isGameOver()){
+
+            if (mouseEvent.getX() >= 400 && mouseEvent.getX() <= 500 && mouseEvent.getY() >= 520 && mouseEvent.getY() <= 550 )
+                game.restartGame();
+
+        }
     }
 
     @Override

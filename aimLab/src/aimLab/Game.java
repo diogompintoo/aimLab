@@ -65,12 +65,18 @@ public class Game {
         score = new Score();
         gameMode = new ClassicMode(grid);
         gameMode.start();
-        timer = new Timer(this,60);
+        timer = new Timer(this,5);
         timer.start();
 
         currentState = GameState.PLAYING;
     }
 
+    public void restartGame(){
+        gameOverScreen.hide();
+        //score = new Score();
+        score.hideScore();
+        startGame();
+    }
     public boolean isRunning() {
         return currentState == GameState.PLAYING;
     }

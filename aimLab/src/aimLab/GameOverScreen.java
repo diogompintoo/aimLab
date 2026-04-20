@@ -7,6 +7,7 @@ import com.codeforall.simplegraphics.graphics.Color;
 
         private Text gameOverText;
         private Text scoreText;
+        private Text restartText;
         private boolean isVisible = false;
 
         public void show(int score) {
@@ -23,6 +24,13 @@ import com.codeforall.simplegraphics.graphics.Color;
             scoreText.grow(25, 25);
             scoreText.draw();
 
+            restartText = new Text(420, 490, "RESTART");
+            restartText.setColor(Color.BLACK);
+            restartText.grow(25, 25);
+            restartText.draw();
+
+
+
             isVisible = true;
         }
 
@@ -30,6 +38,7 @@ import com.codeforall.simplegraphics.graphics.Color;
 
             if (gameOverText != null) gameOverText.delete();
             if (scoreText != null) scoreText.delete();
+            if (restartText!= null) restartText.delete();
 
             isVisible = false;
         }
