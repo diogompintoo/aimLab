@@ -30,7 +30,6 @@
             <fileset dir="${resources.dir}"/>
         </copy>
 
-        <echo message="✅ Compilação OK!"/>
     </target>
 
     <target name="run" depends="compile">
