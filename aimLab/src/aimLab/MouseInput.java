@@ -54,7 +54,7 @@ public class MouseInput implements MouseHandler {
 
         if (game.isGameOver()){
 
-            if (mouseEvent.getX() >= 400 && mouseEvent.getX() <= 500 && mouseEvent.getY() >= 520 && mouseEvent.getY() <= 550 )
+            if (mouseEvent.getX() >= 400 && mouseEvent.getX() <= 500 && mouseEvent.getY() >= 460 && mouseEvent.getY() <= 510 )
                 game.restartGame();
 
         }
