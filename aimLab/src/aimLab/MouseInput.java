@@ -18,6 +18,7 @@ public class MouseInput implements MouseHandler {
         this.game = game;
     }
 
+
     public void init() {
         mouse = new Mouse(this);
         mouse.addEventListener(MouseEventType.MOUSE_CLICKED);
@@ -29,7 +30,10 @@ public class MouseInput implements MouseHandler {
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
-        if (!game.isRunning()) return;
+        if (!game.isRunning() && !game.isGameOver()) {
+            game.startGame();
+            return;
+        }
 
         double x = mouseEvent.getX();
         double y = mouseEvent.getY();

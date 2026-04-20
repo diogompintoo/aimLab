@@ -18,18 +18,12 @@ public class Game {
     private GameOverScreen gameOverScreen;
 
     public Game() {
-        currentState = GameState.PLAYING;
+        currentState = GameState.MENU;
+        menu = new Menu();
+        gameOverScreen = new GameOverScreen();
     }
 
     public void init() {
-        grid = new Grid(20, 15);
-        grid.init();
-        score = new Score();
-        timer = new Timer(this,10);
-        timer.start();
-        gameMode = new ClassicMode(grid);
-        gameMode.start();
-        gameOverScreen = new GameOverScreen();
         mouseInput = new MouseInput(this);
         mouseInput.init();
 
@@ -55,6 +49,7 @@ public class Game {
     }
 
     private void handleMenu(){
+        menu.show();
     }
     private void handlePlaying(){
     }
@@ -63,8 +58,25 @@ public class Game {
         System.out.println("GAME OVER");
     }
 
+    public void startGame(){
+        menu.hide();
+        grid = new Grid(20,15);
+        grid.init();
+        score = new Score();
+        gameMode = new ClassicMode(grid);
+        gameMode.start();
+        timer = new Timer(this,60);
+        timer.start();
+
+        currentState = GameState.PLAYING;
+    }
+
     public boolean isRunning() {
         return currentState == GameState.PLAYING;
+    }
+
+    public boolean isGameOver() {
+        return currentState == GameState.GAME_OVER;
     }
 
     public List<Target> targets() {

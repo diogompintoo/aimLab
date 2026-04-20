@@ -6,16 +6,22 @@ import com.codeforall.simplegraphics.graphics.Color;
 public class Menu {
     private Text title;
     private Text start;
+    private boolean isVisible = false;
 
     public void show(){
-        title = new Text(300 ,300, "AIMLAB");
-        title.grow(25,25);
+
+        if (isVisible) return;
+
+        title = new Text(160 ,160, "AIMLAB");
+        title.grow(30,30);
         title.setColor(Color.BLACK);
         title.draw();
 
-        start = new Text(300 ,300, "PRESS TO START");
-        start.grow(15,15);
+        start = new Text(250 ,250, "PRESS TO START");
+        start.grow(10,10);
         start.draw();
+
+        isVisible = true;
 
     }
     public void hide(){
@@ -23,6 +29,8 @@ public class Menu {
             title.delete();
         if (start != null)
             start.delete();
+
+        isVisible = false;
     }
-        
+
 }
