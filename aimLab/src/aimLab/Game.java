@@ -65,7 +65,7 @@ public class Game {
         score = new Score();
         gameMode = new ClassicMode(grid);
         gameMode.start();
-        timer = new Timer(this,5);
+        timer = new Timer(this,50);
         timer.start();
 
         currentState = GameState.PLAYING;

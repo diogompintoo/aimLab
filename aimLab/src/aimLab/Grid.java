@@ -22,11 +22,14 @@ public class Grid {
 
     public void init(){
         //Rectangle field = new Rectangle(PADDING, PADDING, cols * cellSize, rows * cellSize);
-        gridBackground = new Picture(0,0,"aimLab/resources/background.jpg");
+        gridBackground = new Picture(0,0,"aimLab/resources/background.png");
         gridBackground.draw();
+
         //field.draw();
 
     }
+
+
 
     public int getCellSize() {return cellSize;}
 
