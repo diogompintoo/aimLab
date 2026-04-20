@@ -16,9 +16,9 @@ public class Target implements Destroyable {
     public Target(Position position, Grid grid) {
         this.position = position;
         this.grid = grid;
-        int size = 160;// change this to change pgn size
+        int size = 160;
 
-        picture = new Picture(position.getX(), position.getY(), "aimLab/aimLab/resources/sphere.png");
+        picture = new Picture(position.getX(), position.getY(), "aimLab/resources/sphere.png");
 
 
         int deltaX = size - picture.getWidth();
@@ -63,12 +63,13 @@ public class Target implements Destroyable {
     }
 
     public boolean isHit(double mouseX, double mouseY){
-        int offsetY = 50;
+        int offsetY = 32;
+        int padding = 10;
 
-        return  mouseX >= picture.getX() &&
-                mouseX <= picture.getMaxX() &&
-                mouseY >= picture.getY() + offsetY &&
-                mouseY <= picture.getMaxY() + offsetY;
+        return  mouseX >= picture.getX() + padding &&
+                mouseX <= picture.getMaxX() -  padding &&
+                mouseY >= picture.getY() + offsetY + padding &&
+                mouseY <= picture.getMaxY() + offsetY - padding;
 
 
     }
