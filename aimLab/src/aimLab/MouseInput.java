@@ -30,7 +30,12 @@ public class MouseInput implements MouseHandler {
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
-        if (!game.isRunning() && !game.isGameOver()) {
+        if(game.getState() == Game.GameState.STARTSCREEN){
+            game.goToSelect();
+            return;
+        }
+
+        if (game.getState() == Game.GameState.SELECT) {
             game.startGame();
             return;
         }

@@ -57,6 +57,9 @@ public class Game {
             }
         }
     }
+    public GameState getState(){
+        return currentState;
+    }
 
     private void handleStart(){
         startScreen.show();
@@ -69,6 +72,8 @@ public class Game {
     private void handleGameOver(){
         System.out.println("GAME OVER");
     }
+
+
 
     public void goToSelect(){
         startScreen.hide();
