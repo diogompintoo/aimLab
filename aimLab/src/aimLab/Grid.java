@@ -21,11 +21,10 @@ public class Grid {
     }
 
     public void init(){
-        //Rectangle field = new Rectangle(PADDING, PADDING, cols * cellSize, rows * cellSize);
+
         gridBackground = new Picture(0,0,"resources/background.png");
         gridBackground.draw();
 
-        //field.draw();
 
     }
 

@@ -4,22 +4,26 @@ import java.util.List;
 public class Game {
 
     enum GameState {
-        MENU,
+        STARTSCREEN,
+        SELECT,
         PLAYING,
         GAME_OVER;
     }
     private GameState currentState;
+
     private GameMode gameMode;
     private MouseInput mouseInput;
     private Score score;
     private Timer timer;
     private Grid grid;
-    private Menu menu;
+    private StartScreen startScreen;
+    private SelectScreen selectScreen;
     private GameOverScreen gameOverScreen;
 
     public Game() {
-        currentState = GameState.MENU;
-        menu = new Menu();
+        currentState = GameState.STARTSCREEN;
+        startScreen = new StartScreen();
+        selectScreen = new SelectScreen();
         gameOverScreen = new GameOverScreen();
     }
 
@@ -35,9 +39,15 @@ public class Game {
         init();
         while (true){
             switch (currentState){
-                case MENU:
-                    handleMenu();
+
+                case STARTSCREEN:
+                    handleStart();
                     break;
+
+                case SELECT:
+                    handleSelect();
+                    break;
+
                 case PLAYING:
                     handlePlaying();
                     break;
@@ -48,18 +58,25 @@ public class Game {
         }
     }
 
-    private void handleMenu(){
-        menu.show();
+    private void handleStart(){
+        startScreen.show();
+    }
+    private void handleSelect(){
+        selectScreen.show();
     }
     private void handlePlaying(){
     }
-
     private void handleGameOver(){
         System.out.println("GAME OVER");
     }
 
+    public void goToSelect(){
+        startScreen.hide();
+        currentState = GameState.SELECT;
+    }
+
     public void startGame(){
-        menu.hide();
+        selectScreen.hide();
         grid = new Grid(20,15);
         grid.init();
         score = new Score();
