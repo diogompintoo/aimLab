@@ -1,26 +1,43 @@
 package aimLab;
+import aimLab.GameMods.Practice;
+import aimLab.UtilityResources.GameOverScreen;
+import aimLab.UtilityResources.SelectScreen;
+import aimLab.UtilityResources.Sound;
+import aimLab.UtilityResources.StartScreen;
+import aimLab.Inputs.KeyboardInput;
+
 import java.util.List;
 
 public class Game {
 
     enum GameState {
+        STARTSCREEN,
         MENU,
+        SELECT,
         PLAYING,
         GAME_OVER;
     }
+
     private GameState currentState;
+
     private GameMode gameMode;
-    private MouseInput mouseInput;
+    public MouseInput mouseInput;
     private Score score;
     private Timer timer;
     private Grid grid;
-    private Menu menu;
+    private StartScreen startScreen;
+    private SelectScreen selectScreen;
     private GameOverScreen gameOverScreen;
+    private Sound menuMusic;
+    private boolean musicPlaying = false;
 
     public Game() {
-        currentState = GameState.MENU;
-        menu = new Menu();
+        currentState = GameState.STARTSCREEN;
+        startScreen = new StartScreen();
+        selectScreen = new SelectScreen();
         gameOverScreen = new GameOverScreen();
+        menuMusic = new Sound("aimLab/resources/musica-aim-_4_.wav");
+        System.out.println(currentState);
     }
 
     public void init() {
@@ -33,14 +50,27 @@ public class Game {
 
     public void run(){
         init();
+
         while (true){
+
             switch (currentState){
+
+                case STARTSCREEN:
+                    handleStart();
+                    break;
+
                 case MENU:
                     handleMenu();
                     break;
+
+                case SELECT:
+                    handleSelect();
+                    break;
+
                 case PLAYING:
                     handlePlaying();
                     break;
+
                 case GAME_OVER:
                     handleGameOver();
                     break;
@@ -48,27 +78,77 @@ public class Game {
         }
     }
 
-    private void handleMenu(){
-        menu.show();
+    public GameState getState(){
+        return currentState;
     }
+
+    private void handleStart(){
+        startScreen.show();
+        if (!musicPlaying){
+            menuMusic.playLoop();
+            musicPlaying = true;
+        }
+    }
+
+    private void handleMenu(){
+        if (!musicPlaying){
+            menuMusic.playLoop();
+            musicPlaying = true;
+        }
+    }
+
+    private void handleSelect(){
+        if (!musicPlaying){
+            menuMusic.playLoop();
+            musicPlaying = true;
+        }
+    }
+
     private void handlePlaying(){
+
+        if (gameMode == null) {
+            return;
+        }
     }
 
     private void handleGameOver(){
         System.out.println("GAME OVER");
     }
 
+    public void goToSelect() {
+        startScreen.hide();
+        selectScreen.show();
+        currentState = GameState.SELECT;
+    }
+
     public void startGame(){
-        menu.hide();
-        grid = new Grid(20,15);
+
+        selectScreen.hide();
+
+        if (menuMusic != null){
+            menuMusic.stop();
+            musicPlaying = false;
+        }
+
+        grid = new Grid(20, 15);
         grid.init();
+
         score = new Score();
-        gameMode = new ClassicMode(grid);
+
+        gameMode = new Practice(grid);
+        gameMode.setDisappearTimer(2000, 3);
         gameMode.start();
-        timer = new Timer(this,60);
+
+        timer = new Timer(this, 50);
         timer.start();
 
         currentState = GameState.PLAYING;
+    }
+
+    public void restartGame(){
+        gameOverScreen.hide();
+        score.hideScore();
+        startGame();
     }
 
     public boolean isRunning() {
@@ -83,23 +163,29 @@ public class Game {
         return gameMode.getTargets();
     }
 
-    public void onTargetHit(Target target){
+    public void onTargetHit(Target target) {
         target.Destroy();
         gameMode.getTargets().remove(target);
-        gameMode.spawnNewTargets();
+
         score.add();
-        System.out.println("Score: " + score.getScore());
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ignored) {}
+
+            gameMode.spawnNewTargets();
+        }).start();
     }
+
     public void gameOver() {
         currentState = GameState.GAME_OVER;
         timer.stop();
+
         for (Target t : targets()){
             t.Destroy();
         }
-        gameMode.getTargets().clear();
 
-        gameOverScreen.show(score.getScore());
-        System.out.println("GAME OVER");
-        System.out.println("FINAL SCORE: " + score.getScore());
+        gameMode.getTargets().clear();
     }
 }

@@ -26,6 +26,14 @@ public class Score {
         }
     }
 
+    public void hideScore(){
+        if (scoreText != null)
+            scoreText.delete();
+
+
+        //isVisible = false;
+    }
+
     public int getScore() {
         return score;
     }

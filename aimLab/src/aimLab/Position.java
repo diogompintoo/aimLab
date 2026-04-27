@@ -11,7 +11,7 @@ public class Position {
     public Position(Grid grid) {
         this.grid = grid;
 
-        int margin = 2;
+        int margin = 3;
 
         col =margin + (int)(Math.random() * (grid.getCols() - margin * 2));
         row =margin + (int)(Math.random() * (grid.getRows() - margin * 2));

@@ -1,6 +1,5 @@
 package aimLab;
 
-import com.codeforall.simplegraphics.graphics.Canvas;
 import com.codeforall.simplegraphics.mouse.Mouse;
 import com.codeforall.simplegraphics.mouse.MouseEvent;
 import com.codeforall.simplegraphics.mouse.MouseEventType;
@@ -23,14 +22,18 @@ public class MouseInput implements MouseHandler {
         mouse = new Mouse(this);
         mouse.addEventListener(MouseEventType.MOUSE_CLICKED);
         picture = new Picture();
-        //Canvas.getCanvas().addMouseListener(this);
     }
 
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
-        if (!game.isRunning() && !game.isGameOver()) {
+        if(game.getState() == Game.GameState.STARTSCREEN){
+            game.goToSelect();
+            return;
+        }
+
+        if (game.getState() == Game.GameState.SELECT) {
             game.startGame();
             return;
         }
@@ -50,6 +53,13 @@ public class MouseInput implements MouseHandler {
         }
         if (hitTarget != null) {
             game.onTargetHit(hitTarget);
+        }
+
+        if (game.isGameOver()){
+
+            if (mouseEvent.getX() >= 400 && mouseEvent.getX() <= 500 && mouseEvent.getY() >= 460 && mouseEvent.getY() <= 510 )
+                game.restartGame();
+
         }
     }
 

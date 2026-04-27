@@ -2,6 +2,7 @@ package aimLab;
 
 import com.codeforall.simplegraphics.graphics.Color;
 import com.codeforall.simplegraphics.graphics.Text;
+import javax.swing.SwingUtilities;
 
 public class Timer {
     private int timeLeft;
@@ -10,10 +11,11 @@ public class Timer {
     private boolean running = false;
     private Game game;
 
-    public Timer(Game game, int startTime){
+    public Timer(Game game, int startTime) {
         this.game = game;
         this.timeLeft = startTime;
     }
+
     public void start() {
         if (running) return;
 
@@ -23,8 +25,14 @@ public class Timer {
         timeText.draw();
 
         running = true;
+        timerThread = new Thread(new TimerTask());
+        timerThread.setDaemon(true);
+        timerThread.start();
+    }
 
-        timerThread = new Thread(() -> {
+    private class TimerTask implements Runnable {
+        @Override
+        public void run() {
             while (timeLeft > 0 && running) {
                 try {
                     Thread.sleep(1000);
@@ -33,24 +41,32 @@ public class Timer {
                 }
                 timeLeft--;
                 updateDisplay();
-                if (timeLeft <= 10) {
-                    timeText.setColor(Color.RED);
-                }
             }
             if (running) {
                 game.gameOver();
             }
-        });
-        timerThread.start();
-    }
-    private void updateDisplay() {
-        if (timeText != null) {
-            timeText.setText("TIME: " + timeLeft);
         }
     }
+
+    private void updateDisplay() {
+        SwingUtilities.invokeLater(new UpdateTask());
+    }
+
+    private class UpdateTask implements Runnable {
+        @Override
+        public void run() {
+            if (timeText != null) {
+                timeText.setText("TIME: " + timeLeft);
+                if (timeLeft <= 10) {
+                    timeText.setColor(Color.RED);
+                }
+            }
+        }
+    }
+
     public void stop() {
         running = false;
-        if (timeText != null){
+        if (timeText != null) {
             timeText.delete();
         }
     }

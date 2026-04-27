@@ -12,7 +12,6 @@ public class Target implements Destroyable {
 
 
 
-
     public Target(Position position, Grid grid) {
         this.position = position;
         this.grid = grid;
@@ -29,7 +28,6 @@ public class Target implements Destroyable {
 
         targetInside();
 
-        picture.draw();
 
     }
 
@@ -58,26 +56,41 @@ public class Target implements Destroyable {
 
     }
 
+    public void draw() {
+        picture.draw();
+    }
+
     public Position getPosition() {
         return position;
     }
 
-    public boolean isHit(double mouseX, double mouseY){
-        int offsetY = 32;
-        int padding = 10;
+    public boolean isHit(double mouseX, double mouseY) {
+        double centerX = picture.getX() + picture.getWidth() / 2.0;
+        double centerY = picture.getY() + picture.getHeight() / 2.0 + 25;
 
-        return  mouseX >= picture.getX() + padding &&
-                mouseX <= picture.getMaxX() -  padding &&
-                mouseY >= picture.getY() + offsetY + padding &&
-                mouseY <= picture.getMaxY() + offsetY - padding;
+        double a = picture.getWidth() / 2.0;
+        double b = picture.getHeight() / 2.0;
 
+        double dx = mouseX - centerX;
+        double dy = mouseY - centerY;
 
+        return (dx * dx) / (a * a) + (dy * dy) / (b * b) <= 1.0;
+    }
+
+    public boolean overlaps(Target other) {
+        double dx = this.position.getX() - other.position.getX();
+        double dy = this.position.getY() - other.position.getY();
+
+        double r1 = this.picture.getWidth() / 2.0;
+        double r2 = other.picture.getWidth() / 2.0;
+
+        return dx * dx + dy * dy < (r1 + r2) * (r1 + r2);
     }
 
     public void Destroy(){
         if (picture != null){
-        picture.delete();
-        picture = null;
+            picture.delete();
+            picture = null;
+        }
     }
-}
 }
